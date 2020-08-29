@@ -1,5 +1,6 @@
-import React, { useReducer, Dispatch } from 'react';
+import React, { useReducer, Dispatch, useMemo, useEffect, useCallback, useState } from 'react';
 import reducers, { actionTypes } from './reducer';
+import dispatches, { dispatchTypes } from './action';
 
 export interface dispatchType {
   type: actionTypes,
@@ -7,17 +8,16 @@ export interface dispatchType {
 };
 export interface contextType {
   state: state,
-  dispatch: Dispatch<dispatchType>,
+  commit: Dispatch<dispatchType>,
+  dispatch: (dispatchType: dispatchTypes, payload?: any) => any,
 };
 export type state = typeof initData;
 
 const initData = {
-  name: 'abc',
-  age: 123,
-  list: [],
+  name: 'abc'
 };
 
-export const context = React.createContext<contextType>({state: initData, dispatch: () => {}});
+export const context = React.createContext<contextType>({state: initData, commit: () => {}, dispatch: () => {}});
 
 const reducer = (state: state, { type, payload }: dispatchType) => {
   return {...reducers[type](state, payload)};
@@ -25,8 +25,18 @@ const reducer = (state: state, { type, payload }: dispatchType) => {
 
 const Store: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initData);
+  const DISPATCH = useCallback((dispatchType: dispatchTypes, payload?: any) => {
+    const result = dispatches[dispatchType]({state, dispatch}, payload);
+    return result;
+  }, [state]);
   return (
-    <context.Provider value={{state, dispatch}}>
+    <context.Provider value={
+      {
+        state,
+        commit: dispatch,
+        dispatch: DISPATCH,
+      }
+    }>
       { children }
     </context.Provider>
   );
