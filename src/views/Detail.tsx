@@ -1,16 +1,19 @@
 import React from 'react';
-import { Text, View } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import { Text, View, Button } from 'react-native';
 
-const Detail = () => {
+import { SafeAreaView } from 'react-native-safe-area-context';
+
+const Detail = ({ navigation }: any) => {
   return(
-    <>
+    <SafeAreaView style={{flex: 1}}>
       <View style={{ flex: 1, backgroundColor: '#bfa'}}>
-        <ScrollView>
-          <Text>Detail</Text>
-        </ScrollView>
+        <Text>Detail</Text>
+        <Button
+          title="go to playList"
+          onPress={() => {navigation.navigate('PlayList')}}
+        />
       </View>
-    </>
+    </SafeAreaView>
   );
 }
 
