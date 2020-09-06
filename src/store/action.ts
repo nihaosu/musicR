@@ -14,7 +14,6 @@ const actions: {
   [key in dispatchTypes]: (dispatchContext: dispatchContext, payload: any) => any
 } = {
   setName({state, dispatch}) {
-    console.log(state);
     dispatch({type: actionTypes.CHANGE_NAME, payload: { name: 'klj' }});
   }
 }

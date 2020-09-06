@@ -1,11 +1,14 @@
 import React from 'react';
 import { Text, View } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const Detail = () => {
   return(
     <>
       <View style={{ flex: 1, backgroundColor: '#bfa'}}>
-        <Text>Detail</Text>
+        <ScrollView>
+          <Text>Detail</Text>
+        </ScrollView>
       </View>
     </>
   );

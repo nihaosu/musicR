@@ -15,9 +15,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createStackNavigator, CardStyleInterpolators, TransitionSpecs } from '@react-navigation/stack';
 
-import Home from './views/Home';
-import Detail from './views/Detail';
-import Store from './store';
+import Home from '@/views/Home';
+import Detail from '@/views/Detail';
+import Store from '@/store';
 
 enableScreens();
 
