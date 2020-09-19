@@ -9,8 +9,8 @@ const Detail = ({ navigation }: any) => {
       <View style={{ flex: 1, backgroundColor: '#bfa'}}>
         <Text>Detail</Text>
         <Button
-          title="go to playList"
-          onPress={() => {navigation.navigate('PlayList')}}
+          title="go to SongBox"
+          onPress={() => {navigation.navigate('SongBox')}}
         />
       </View>
     </SafeAreaView>

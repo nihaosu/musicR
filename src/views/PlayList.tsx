@@ -1,15 +1,15 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 
-import { SafeAreaView } from 'react-native-safe-area-context';
+import ModalWraper from '@/components/ModalWraper';
 
 const PlayList = ({ navigation }: any) => {
   return(
-    <SafeAreaView style={{flex: 1}}>
-      <View style={{ flex: 1, backgroundColor: '#fba', opacity: 0.5}}>
+    <ModalWraper height={150} navigation={navigation}>
+      <View style={{ flex: 1, backgroundColor: '#fba'}}>
         <Text>PlayList</Text>
       </View>
-    </SafeAreaView>
+    </ModalWraper>
   );
 }
 

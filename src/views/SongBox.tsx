@@ -1,17 +1,16 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-
-import { SafeAreaView } from 'react-native-safe-area-context';
+import ModalWraper from '@/components/ModalWraper';
 
 const SongBox = ({ navigation }: any) => {
   return(
-    <SafeAreaView style={{flex: 1}}>
-      <View style={{ flex: 1, backgroundColor: '#abf'}}>
+    <ModalWraper navigation={navigation} height={175}>
+      <View style={{ flex: 1, backgroundColor: '#fff'}}>
         <Text>SongBox</Text>
         <Text>SongBox</Text>
         <Text>SongBox</Text>
       </View>
-    </SafeAreaView>
+    </ModalWraper>
   );
 }
 
