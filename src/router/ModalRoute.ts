@@ -39,7 +39,13 @@ const ModalRouteList: {
   {
     name: 'SongBox',
     component: SongBox,
-    options: screenOptions
+    options: {
+      headerShown: false,
+      gestureEnabled: true,
+      gestureDirection: 'vertical',
+      gestureVelocityImpact: 1,
+      gestureResponseDistance: {horizontal:25, vertical:1000},
+    }
   },
 ];
 

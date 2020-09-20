@@ -3,7 +3,7 @@ import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/
 
 import Home from '@/views/Home';
 import Detail from '@/views/Detail';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 
 type MainStackParamList = {
   Home: undefined;
@@ -30,14 +30,7 @@ const MainRoute = () => {
           name="Home"
           component={Home}
           options={{
-            headerShown: false,
-            headerStyle: {
-              backgroundColor: '#555', //背景颜色
-            },
-            headerTintColor: '#fff',    //文字颜色
-            headerTitleStyle: {
-              fontWeight: 'bold',  //文字加粗
-            }
+            headerShown: false
           }}
         />
         <MainStack.Screen
@@ -51,8 +44,7 @@ const MainRoute = () => {
           }}
         />
       </MainStack.Navigator>
-      <View style={{height: 50, backgroundColor: '#fba'}}>
-        <Text>main</Text>
+      <View style={{height: 50, backgroundColor: '#ffd'}}>
       </View>
     </>
   )

@@ -1,19 +1,15 @@
 import React, { useEffect, useContext } from 'react';
 import { Button, View, Text } from 'react-native';
-import { useNavigationState } from '@react-navigation/native';
 import { context } from '@/store';
 import { dispatchTypes } from '@/store/action';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
-const Home = ({ navigation }: any) => {
-  const { routeNames, index } = useNavigationState(state => state); // 当前路由的状态
-  console.log(routeNames[index]);
+const Home = ({ navigation, show }: any) => {
   const {state, commit, dispatch} = useContext(context);
   useEffect(() => {
     dispatch(dispatchTypes.setName);
   }, []);
   return (
-    <SafeAreaView>
+    <View style={{display: show ? 'flex' : 'none', flex: 1}}>
       <Button
         title='go to detail'
         onPress={() => navigation.navigate('Detail')}
@@ -34,7 +30,7 @@ const Home = ({ navigation }: any) => {
         title="go to SongBox"
         onPress={() => {navigation.navigate('SongBox')}}
       />
-    </SafeAreaView>
+    </View>
   );
 }
 
