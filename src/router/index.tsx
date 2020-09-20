@@ -6,10 +6,11 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
 import MainRoute from '@/router/MainRoute';
 import ModalRouteList from '@/router/ModalRoute';
+import { StackParamList } from './type';
 
 enableScreens();
 
-const RootStack = createStackNavigator();
+const RootStack = createStackNavigator<StackParamList>();
 
 const RouterView = () => {
   return (

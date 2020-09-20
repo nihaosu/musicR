@@ -26,18 +26,23 @@ const screenOptions= {
   })
 }
 
+enum MODAL_NAME {
+  PlayList = 'PlayList',
+  SongBox = 'SongBox'
+}
+
 const ModalRouteList: {
-  name: string,
+  name: MODAL_NAME,
   component: any,
   options?: any
 }[] = [
   {
-    name: 'PlayList',
+    name: MODAL_NAME.PlayList,
     component: PlayList,
     options: screenOptions
   },
   {
-    name: 'SongBox',
+    name: MODAL_NAME.SongBox,
     component: SongBox,
     options: {
       headerShown: false,

@@ -6,8 +6,9 @@ import { dispatchTypes } from '@/store/action';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Music from '@/views/Home/Music';
 import Mine from '@/views/Home/Mine';
+import {ScreenNavigationProp} from '@/router/type';
 
-const Home = ({ navigation }: any) => {
+const Home = ({navigation}: {navigation: ScreenNavigationProp}) => {
   const { routeNames, index } = useNavigationState(state => state); // 当前路由的状态
   console.log(routeNames[index]);
   const {state, commit, dispatch} = useContext(context);

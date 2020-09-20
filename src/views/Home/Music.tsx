@@ -2,8 +2,9 @@ import React, { useEffect, useContext } from 'react';
 import { Button, View, Text } from 'react-native';
 import { context } from '@/store';
 import { dispatchTypes } from '@/store/action';
+import {ScreenNavigationProp} from '@/router/type';
 
-const Home = ({ navigation, show }: any) => {
+const Home = ({ navigation, show }: { navigation: ScreenNavigationProp, show: boolean }) => {
   const {state, commit, dispatch} = useContext(context);
   useEffect(() => {
     dispatch(dispatchTypes.setName);

@@ -4,11 +4,7 @@ import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/
 import Home from '@/views/Home';
 import Detail from '@/views/Detail';
 import { View } from 'react-native';
-
-type MainStackParamList = {
-  Home: undefined;
-  Detail: undefined;
-}
+import { MainStackParamList } from './type';
 
 const MainStack = createStackNavigator<MainStackParamList>();
 
@@ -36,15 +32,9 @@ const MainRoute = () => {
         <MainStack.Screen
           name="Detail"
           component={Detail}
-          options={{
-            gestureEnabled: true,
-            gestureDirection: 'vertical', //手势退出
-            gestureVelocityImpact: 1,
-            gestureResponseDistance: {horizontal:25, vertical:1000},
-          }}
         />
       </MainStack.Navigator>
-      <View style={{height: 50, backgroundColor: '#ffd'}}>
+      <View style={{height: 80, backgroundColor: '#fff'}}>
       </View>
     </>
   )
