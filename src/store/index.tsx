@@ -14,7 +14,7 @@ export interface contextType {
 export type state = typeof initData;
 
 const initData = {
-  name: 'abc'
+  curSelect: ''
 };
 
 export const context = React.createContext<contextType>({state: initData, commit: () => {}, dispatch: () => {}});
@@ -26,7 +26,7 @@ const reducer = (state: state, { type, payload }: dispatchType) => {
 const Store: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initData);
   const DISPATCH = useCallback((dispatchType: dispatchTypes, payload?: any) => {
-    const result = dispatches[dispatchType]({state, dispatch}, payload);
+    const result = dispatches[dispatchType] && dispatches[dispatchType]({state, dispatch}, payload);
     return result;
   }, [state]);
   return (

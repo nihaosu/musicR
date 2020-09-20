@@ -1,10 +1,26 @@
 import PlayList from '@/views/PlayList';
 import SongBox from '@/views/SongBox';
 
+const config = {
+  animation: 'spring',
+  config: {
+    stiffness: 1000,
+    damping: 80,
+    mass: 20,
+    overshootClamping: true,
+    restDisplacementThreshold: 0.01,
+    restSpeedThreshold: 0.01,
+  },
+};
+
 const screenOptions= {
   headerShown: false,
   cardStyle: { backgroundColor: 'transparent' },
   cardOverlayEnabled: true,
+  transitionSpec: {
+    open: config,
+    close: config
+  },
   cardStyleInterpolator: ({ current: { progress }, layouts: { screen: { height } } }: any) => ({
     cardStyle: {
       transform: [{

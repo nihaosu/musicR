@@ -5,8 +5,8 @@ import ModalWraper from '@/components/ModalWraper';
 
 const PlayList = ({ navigation }: any) => {
   return(
-    <ModalWraper height={150} navigation={navigation}>
-      <View style={{ flex: 1, backgroundColor: '#fba'}}>
+    <ModalWraper height={125} navigation={navigation}>
+      <View style={{ flex: 1, backgroundColor: '#fff'}}>
         <Text>PlayList</Text>
       </View>
     </ModalWraper>

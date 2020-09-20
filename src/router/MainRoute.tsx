@@ -1,14 +1,15 @@
 import React from 'react';
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
+import { MainStackParamList } from './type';
+import {ScreenNavigationProp} from '@/router/type';
 
 import Home from '@/views/Home';
 import Detail from '@/views/Detail';
-import { View } from 'react-native';
-import { MainStackParamList } from './type';
+import TabBox from '@/components/TabBox';
 
 const MainStack = createStackNavigator<MainStackParamList>();
 
-const MainRoute = () => {
+const MainRoute = ({navigation}: {navigation: ScreenNavigationProp}) => {
   return (
     <>
       <MainStack.Navigator
@@ -34,8 +35,7 @@ const MainRoute = () => {
           component={Detail}
         />
       </MainStack.Navigator>
-      <View style={{height: 80, backgroundColor: '#fff'}}>
-      </View>
+      <TabBox navigation={navigation} />
     </>
   )
 }

@@ -6,9 +6,7 @@ import {ScreenNavigationProp} from '@/router/type';
 
 const Home = ({ navigation, show }: { navigation: ScreenNavigationProp, show: boolean }) => {
   const {state, commit, dispatch} = useContext(context);
-  useEffect(() => {
-    dispatch(dispatchTypes.setName);
-  }, []);
+  useEffect(() => {}, []);
   return (
     <View style={{display: show ? 'flex' : 'none', flex: 1}}>
       <Button
@@ -17,7 +15,6 @@ const Home = ({ navigation, show }: { navigation: ScreenNavigationProp, show: bo
       />
       <View>
         <Text>{'nihap'}</Text>
-        <Text>{state.name}</Text>
       </View>
       <Button
         title="go to playList"
@@ -25,7 +22,6 @@ const Home = ({ navigation, show }: { navigation: ScreenNavigationProp, show: bo
       />
       <View>
         <Text>{'nihap'}</Text>
-        <Text>{state.name}</Text>
       </View>
       <Button
         title="go to SongBox"

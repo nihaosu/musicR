@@ -8,14 +8,10 @@ interface dispatchContext {
 }
 
 export enum dispatchTypes {
-  setName = 'setName',
 }
 const actions: {
   [key in dispatchTypes]: (dispatchContext: dispatchContext, payload: any) => any
 } = {
-  setName({state, dispatch}) {
-    dispatch({type: actionTypes.CHANGE_NAME, payload: { name: 'klj' }});
-  }
 }
 
 export default actions;
