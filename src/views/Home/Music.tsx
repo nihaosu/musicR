@@ -8,7 +8,7 @@ const Home = ({ navigation, show }: { navigation: ScreenNavigationProp, show: bo
   const {state, commit, dispatch} = useContext(context);
   useEffect(() => {}, []);
   return (
-    <View style={{display: show ? 'flex' : 'none', flex: 1}}>
+    <View style={{display: show ? 'flex' : 'none', flex: 1, backgroundColor: '#ffe'}}>
       <Button
         title='go to detail'
         onPress={() => navigation.navigate('Detail')}

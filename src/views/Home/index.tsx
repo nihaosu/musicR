@@ -7,9 +7,7 @@ import Mine from '@/views/Home/Mine';
 import {ScreenNavigationProp} from '@/router/type';
 
 const Home = ({navigation}: {navigation: ScreenNavigationProp}) => {
-  const { routeNames, index } = useNavigationState(state => state); // 当前路由的状态
-  // console.log(routeNames[index]);
-  const {state} = useContext(context);
+  const { state } = useContext(context);
   return (
     <SafeAreaView style={{flex: 1}}>
       <Music navigation={navigation} show={state.curSelect === 'music' ? true : false} />

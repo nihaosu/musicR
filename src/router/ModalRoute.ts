@@ -27,8 +27,8 @@ const screenOptions= {
         translateX: 0
       }, {
         translateY: progress.interpolate({
-          inputRange: [1, 2],
-          outputRange: [0,-height],
+          inputRange: [0, 1],
+          outputRange: [height, 0],
         })
       }],
     },

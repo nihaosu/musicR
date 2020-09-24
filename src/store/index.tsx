@@ -14,7 +14,7 @@ export interface contextType {
 export type state = typeof initData;
 
 const initData = {
-  curSelect: ''
+  curSelect: '',
 };
 
 export const context = React.createContext<contextType>({state: initData, commit: () => {}, dispatch: () => {}});
