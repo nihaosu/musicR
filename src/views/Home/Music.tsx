@@ -3,6 +3,7 @@ import { Button, View, Text } from 'react-native';
 import { context } from '@/store';
 import { dispatchTypes } from '@/store/action';
 import {ScreenNavigationProp} from '@/router/type';
+import Loading from '@/components/Loading';
 
 const Home = ({ navigation, show }: { navigation: ScreenNavigationProp, show: boolean }) => {
   const {state, commit, dispatch} = useContext(context);
@@ -27,6 +28,9 @@ const Home = ({ navigation, show }: { navigation: ScreenNavigationProp, show: bo
         title="go to SongBox"
         onPress={() => {navigation.navigate('SongBox')}}
       />
+      <View style={{alignItems: 'center', marginTop: 20}}>
+        <Loading />
+      </View>
     </View>
   );
 }
