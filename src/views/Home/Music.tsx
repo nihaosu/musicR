@@ -4,6 +4,7 @@ import { context } from '@/store';
 import { dispatchTypes } from '@/store/action';
 import {ScreenNavigationProp} from '@/router/type';
 import Loading from '@/components/Loading';
+import LoadingC from '@/components/LoadingC';
 
 const Home = ({ navigation, show }: { navigation: ScreenNavigationProp, show: boolean }) => {
   const {state, commit, dispatch} = useContext(context);
@@ -30,6 +31,7 @@ const Home = ({ navigation, show }: { navigation: ScreenNavigationProp, show: bo
       />
       <View style={{alignItems: 'center', marginTop: 20}}>
         <Loading />
+        <LoadingC />
       </View>
     </View>
   );
