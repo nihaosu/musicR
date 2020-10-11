@@ -16,7 +16,6 @@ const Loading = ({ height = 20 }: props) => {
   const shortHeight = 3 * height / 5;
   const longHeight = 4 * height / 5;
   const minHeight = 3 * height / 10;
-  const differ = 7 * height / 10;
 
   const _first = useRef<View|null>(null);
   const _second = useRef<View|null>(null);
