@@ -1,8 +1,8 @@
 import React, { useRef, useEffect } from 'react';
-import Canvas, { CanvasRenderingContext2D } from 'react-native-canvas';
+import Canvas, { CanvasRenderingContext2D, Path2D } from 'react-native-canvas';
 
 function drawRect(
-  ctx: CanvasRenderingContext2D,
+  ctx: CanvasRenderingContext2D | Path2D,
   width: number,
   height: number,
   centerPoint: [number, number],
@@ -11,7 +11,7 @@ function drawRect(
 ) {
   const [x, y] = centerPoint;
   const widthHalf = width/2;
-  ctx.beginPath();
+  // ctx.beginPath();
   if (height < width) {
     const heightF = (width * width * height) / (width * width - height * height);
     const r = (width * width + height * height) / (4 * height);
@@ -39,8 +39,8 @@ function drawRect(
   }
   ctx.closePath();
   if (!fillColor) return
-  ctx.fillStyle = fillColor;
-  ctx.fill();
+  (ctx as CanvasRenderingContext2D).fillStyle = fillColor;
+  (ctx as CanvasRenderingContext2D).fill();
 }
 
 interface props {
@@ -54,6 +54,10 @@ const Loading = ({ height = 20 }: props) => {
   const longHeight = 4 * height / 5;
   const minHeight = 3 * height / 10;
   const gap = Math.floor(3 * height / 20);
+  const speed: number = 1;
+  const paths: {
+    [key: string]: Path2D
+  } = {}
 
   function handleHeight(aniHeight: number) {
     if (aniHeight < minHeight) return minHeight
@@ -117,32 +121,25 @@ const Loading = ({ height = 20 }: props) => {
     },
   ]
 
-  const context = useRef<CanvasRenderingContext2D|null>(null);
+  // const context = useRef<CanvasRenderingContext2D|null>(null);
+  const CANVAS = useRef<Canvas|null>(null);
   const aniId = useRef<number>(0);
 
   function draw(aniHeight: number, dirState: 'down' | 'up') {
-    if (!context.current) return
-    const ctx = context.current;
-    const arr = state.map(({centerP, getHeight}) => [getHeight(aniHeight, dirState), centerP] as [number, [number, number]])
-    new Canvas({ref: (canvas) => {
-      canvas.width = width;
-      canvas.height = height;
-      console.log(canvas, 'canvas');
-    }})
-    ctx.clearRect(0, 0, width, height);
-    arr.forEach((([height, centerP]) => drawRect(ctx, colWidth, height, centerP, 's', '#111310')))
-    // ctx.drawImage(canvas, 0, 0, width, height);
+    if (!CANVAS.current) return
+    const ctx = CANVAS.current.getContext('2d');
+    // ctx.clearRect(0, 0, width, height);
+    CANVAS.current.height = height
+    ctx.fill(paths[aniHeight + dirState]);
   }
 
   function start() {
     let aniHeight = height;
     let state: 'down' | 'up' = "down";
-    const speed: number = 1;
 
     function change() {
       draw(aniHeight, state);
-      setTimeout(change, 50);
-      // aniId.current = requestAnimationFrame(change);
+      aniId.current = requestAnimationFrame(change);
       if (state === 'down') {
         if (aniHeight - speed < 0) {  // minheight -  3/10 * height
           aniHeight = minHeight;
@@ -169,29 +166,66 @@ const Loading = ({ height = 20 }: props) => {
   }
 
   function initHeight() {
-    if (!context.current) return
-    const ctx = context.current;
+    if (!CANVAS.current) return
+    const ctx = CANVAS.current.getContext('2d');
     ctx.clearRect(0, 0, width, height);
+    ctx.fill(paths['init']);
+  }
+
+  function initPath() {
+    if (!CANVAS.current) return
+    const path = new Path2D(CANVAS.current);
     state.forEach(({centerP, initHeight}) => {
-      drawRect(ctx, colWidth, initHeight, centerP, 's', '#111310');
+      drawRect(path, colWidth, initHeight, centerP, 's');
     })
+    paths['init'] = path
+
+    let aniHeight = height;
+    let dirState: 'down' | 'up' = "down";
+    while (!paths[aniHeight + dirState]) {
+      const path = new Path2D(CANVAS.current);
+      state.forEach(({centerP, getHeight}) => drawRect(path, colWidth, getHeight(aniHeight, dirState), centerP));
+      paths[aniHeight + dirState] = path;
+      if (dirState === 'down') {
+        if (aniHeight - speed < 0) {
+          aniHeight = minHeight;
+          dirState = 'up';
+          aniHeight += speed;
+        } else {
+          aniHeight -= speed;
+        }
+      } else {
+        if (aniHeight + speed > 13/10 * height) {
+          aniHeight = height;
+          dirState = 'down';
+          aniHeight -= speed;
+        } else {
+          aniHeight += speed;
+        }
+      }
+    }
   }
 
   useEffect(() => {
-    setTimeout(() => {
-      initHeight();
-    });
+    initPath()
     setTimeout(() => {
       start();
-    }, 1000);
+    });
+    // setTimeout(() => {
+    //   start();
+    // }, 1000);
   }, [])
 
-  return <Canvas ref={(canvas: Canvas) => {
-    if (!canvas) return
-    canvas.width = width;
-    canvas.height = height;
-    context.current = canvas.getContext('2d');
-  }} />
+  return <>
+    <Canvas ref={(canvas: Canvas) => {
+      if (!canvas) return
+      canvas.width = width;
+      canvas.height = height;
+      CANVAS.current = canvas;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#111310'
+    }} />
+  </>
 }
 
 export default Loading;

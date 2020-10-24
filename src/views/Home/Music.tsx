@@ -4,7 +4,7 @@ import { context } from '@/store';
 import { dispatchTypes } from '@/store/action';
 import {ScreenNavigationProp} from '@/router/type';
 import Loading from '@/components/Loading';
-import LoadingC from '@/components/LoadingC';
+import LoadingC from '@/components/LoadingCa';
 
 const Home = ({ navigation, show }: { navigation: ScreenNavigationProp, show: boolean }) => {
   const {state, commit, dispatch} = useContext(context);

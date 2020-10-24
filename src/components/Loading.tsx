@@ -111,7 +111,7 @@ const Loading = ({ height = 20 }: props) => {
       render(aniHeight, state);
       aniId.current = requestAnimationFrame(change);
       if (state === 'down') {
-        if (aniHeight - speed <= 0) {  // minheight -  3/10 * height
+        if (aniHeight - speed < 0) {  // minheight -  3/10 * height
           aniHeight = minHeight;
           state = 'up';
           aniHeight += speed;
@@ -119,7 +119,7 @@ const Loading = ({ height = 20 }: props) => {
           aniHeight -= speed;
         }
       } else {
-        if (aniHeight + speed >= 13/10 * height) {   // height +  3/10 * height
+        if (aniHeight + speed > 13/10 * height) {   // height +  3/10 * height
           aniHeight = height;
           state = 'down';
           aniHeight -= speed;
